@@ -1,0 +1,146 @@
+.p-b-34 {
+  padding-bottom: 34px;
+}
+
+/*Damos espacio entre logo y el titulo de iniciar sesion*/
+.p-t-27 {
+  padding-top: 27px;
+}
+
+* {
+  margin: 0px;
+  /* Eliminamos los margenes y los espaciados */
+  padding: 0px;
+  box-sizing: border-box;
+  /*Cambiamos el border de toda una pantalla a un borde tipo caja */
+}
+
+body,
+html {
+  height: 100%;
+  /*Toda la pantalla va a tener una altura del 100% va a aprovechar toda la pantalla */
+}
+
+.proceso1 {
+  width: 10%;
+  line-height: 1.2;
+  margin-left: 45%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+}
+
+.guardar-form-btn {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  height: 40px;
+  border-radius: 25px;
+  background: white;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.limite {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.container-tabla4 {
+  width: 100%; /*Ancho*/
+  height: 50vh; /*Altura minima*/
+  display: -webkit-box; /*Pantalla en Chrome tipo caja*/
+  display: -webkit-flex; /*Pantalla en Chrome tambien ser flexible*/
+  display: -moz-box; /*Pantalla en Firefox tipo caja*/
+  display: -o-flexbox; /*Pantalla en Opera caja flexible*/
+  display: flex; /*Pantalla Flexible por defecto*/
+  flex-wrap: wrap;
+  justify-content: center; /*Contenido justificado al centro */
+  align-items: center; /*Contenido alineado al centro*/
+  padding: 15px; /*Espaciado entre cada campo*/
+
+  background-repeat: no-repeat; /*Fondo color solido*/
+  background-position: center; /*Fondo centrado*/
+  background-size: cover; /*Tamaño del fondo sera cubrir toda la pantalla*/
+  position: relative;
+  z-index: 1;
+}
+
+.form-tabla {
+  width: 100%; /*Tamaño del formulario*/
+}
+
+.tabla-form-titulo {
+  font-size: 30px; /*Tamaño del encabezado*/
+  color: #fff;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase; /*Convertimos el texto de minuscula a mayusculas */
+
+  display: block;
+}
+
+#tabla4 {
+  overflow: scroll;
+  height: 50vh;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+button {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border a ninguno*/
+  background: transparent;
+  /*Cambiamos el relleno a transparente o ninguno*/
+  transition-duration: 0.4s;
+  /*Establecemo cuanto tardara el boton en cambiar de color al pasar el puntero sobre el */
+}
+
+button:hover {
+  /*Cambiamos el estado del boton al pasar sobre el puntero sobre el boton*/
+
+  cursor: pointer; /*Cambiar el curso al pasar el puntero sobre el boton*/
+  background-color: #69859a; /*Cambiamos el color de fondo del boton*/
+  color: black; /*Cambiamos el color de la letra del boton*/
+}
+
+.tabla-form-btn {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  height: 40px;
+  border-radius: 25px;
+  background: white;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+@media (max-width: 786px) {
+  #tabla4 {
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 300px;
+
+    padding-top: 2em;
+  }
+  .container-tabla4 {
+    height: 33vh;
+  }
+}

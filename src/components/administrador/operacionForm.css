@@ -1,0 +1,226 @@
+/*//////////////////////////////////////////////////////////////////
+[ Eliminamos todo el estilo que viene con Boostrap ]*/
+
+.p-b-34 {
+  padding-bottom: 34px;
+}
+
+/*Damos espacio entre logo y el titulo de iniciar sesion*/
+.p-t-27 {
+  padding-top: 27px;
+}
+
+* {
+  margin: 0px;
+  /* Eliminamos los margenes y los espaciados */
+  padding: 0px;
+  box-sizing: border-box;
+  /*Cambiamos el border de toda una pantalla a un borde tipo caja */
+}
+
+body,
+html {
+  height: 100%;
+  /*Toda la pantalla va a tener una altura del 100% va a aprovechar toda la pantalla */
+}
+
+/*------------- Eliminamos los estilos del campo de texto --------------------------------*/
+input {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border  a ninguno*/
+}
+
+/*------------------Eliminamos los estilos del boton iniciar sesion---------------------------*/
+button {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border a ninguno*/
+  background: transparent;
+  /*Cambiamos el relleno a transparente o ninguno*/
+  transition-duration: 0.4s;
+  /*Establecemo cuanto tardara el boton en cambiar de color al pasar el puntero sobre el */
+}
+
+button:hover {
+  /*Cambiamos el estado del boton al pasar sobre el puntero sobre el boton*/
+
+  cursor: pointer; /*Cambiar el curso al pasar el puntero sobre el boton*/
+  background-color: #69859a; /*Cambiamos el color de fondo del boton*/
+  color: white; /*Cambiamos el color de la letra del boton*/
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
+
+/*------------------Cambiamos el ancho del formulario---------------------------*/
+.limite {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/*------------------Centramos el formulario---------------------------*/
+.container-Login {
+  width: 100%; /*Ancho*/
+  min-height: 100vh; /*Altura minima*/
+  display: -webkit-box; /*Pantalla en Chrome tipo caja*/
+  display: -webkit-flex; /*Pantalla en Chrome tambien ser flexible*/
+  display: -moz-box; /*Pantalla en Firefox tipo caja*/
+  display: -o-flexbox; /*Pantalla en Opera caja flexible*/
+  display: flex; /*Pantalla Flexible por defecto*/
+  flex-wrap: wrap;
+  justify-content: center; /*Contenido justificado al centro */
+  align-items: center; /*Contenido alineado al centro*/
+  padding: 15px; /*Espaciado entre cada campo*/
+
+  background-repeat: no-repeat; /*Fondo color solido*/
+  background-position: center; /*Fondo centrado*/
+  background-size: cover; /*Tamaño del fondo sera cubrir toda la pantalla*/
+  position: relative;
+}
+
+.wrap-login {
+  /*Cuadrado que tiene adentro los campos del login*/
+  width: 400px;
+  border-radius: 20px; /*Bordes redondos*/
+  overflow: hidden;
+  padding: 40px 55px 37px 55px; /*Espaciado de la izqierda, derecha, arriba y abajo*/
+
+  /*Fondo que tendra el cuadrado para que se vea uniforme en cualquier navegador*/
+
+  background: #14c4b0e6;
+  background: -webkit-linear-gradient(top, #14c4b0e6);
+  background: -o-linear-gradient(top, #14c4b0e6);
+  background: -moz-linear-gradient(top, #14c4b0e6);
+  background: linear-gradient(top, #14c4b0e6);
+}
+
+/*------------------------------------------------------------------
+[ Formulario ]*/
+
+.form-login {
+  width: 100%; /*Tamaño del formulario*/
+}
+
+.form-login-logo {
+  font-size: 60px; /*Tamaño de la fuente*/
+  color: black; /*Color de la fuente*/
+
+  /*Pantalla de los diferentes navegadores*/
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  justify-content: center; /*Justificacion de contenidos al centro*/
+  align-items: center; /*Alineacion de contenidos al centro*/
+  width: 120px; /*Ancho*/
+  height: 120px; /*Altura*/
+  border-radius: 50%; /*border redondo*/
+  background-color: #fff; /*Color de fondo*/
+  margin: 0 auto; /*Margenes ninguno*/
+}
+
+.login-form-title {
+  /*Encabezado principal*/
+  font-size: 30px; /*Tamaño del encabezado*/
+  color: #fff;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase; /*Convertimos el texto de minuscula a mayusculas */
+
+  display: block;
+}
+
+/*------------------------------------------------------------------
+[ Input o campos de textos ]*/
+.wrap-input {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px solid transparent;
+  margin-bottom: 30px;
+}
+
+.input1 {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 45px;
+  background: white;
+  padding: 0 5px 0 38px;
+  border-radius: 25px;
+}
+
+/*---------------------------------------------*/
+.focus-input {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.input1:focus {
+  padding-left: 25px;
+}
+
+/*------------------------------------------------------------------
+[ Boton]*/
+
+.container-login-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login-form-btn {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 120px;
+  height: 50px;
+  border-radius: 25px;
+
+  background: #ffffff;
+  background: -webkit-linear-gradient(bottom, #fff);
+  background: -o-linear-gradient(bottom, #ffffff);
+  background: -moz-linear-gradient(bottom, #ffffff);
+  background: linear-gradient(bottom, #ffffff);
+  position: relative;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+/*------------------------------------------------------------------
+[ Responsiva ]*/
+
+@media (max-width: 576px) {
+  .wrap-login100 {
+    padding: 55px 15px 37px 15px;
+  }
+}
