@@ -1,0 +1,333 @@
+.p-b-34 {
+  padding-bottom: 34px;
+}
+
+/*Damos espacio entre logo y el titulo de iniciar sesion*/
+.p-t-27 {
+  padding-top: 27px;
+}
+
+* {
+  margin: 0px;
+  /* Eliminamos los margenes y los espaciados */
+  padding: 0px;
+  box-sizing: border-box;
+  /*Cambiamos el border de toda una pantalla a un borde tipo caja */
+}
+
+body,
+html {
+  height: 100%;
+  /*Toda la pantalla va a tener una altura del 100% va a aprovechar toda la pantalla */
+}
+
+.proceso1 {
+  width: 10%;
+  line-height: 1.2;
+  margin-left: 10%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+}
+
+.espacio {
+  margin: 0px 12px 12px 20px;
+}
+.espacio1 {
+  margin: 0px 0px 0px 0px;
+}
+.btn-seleccion {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+  justify-content: center;
+  align-items: center;
+  min-width: 125px;
+  width: 70px;
+  height: 40px;
+  border-radius: 25px;
+  background: white;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.menu-form-btn {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 120px;
+  height: 38px;
+  border-radius: 5px;
+  background: #ffffff;
+  background: -webkit-linear-gradient(bottom, #fff);
+  background: -o-linear-gradient(bottom, #ffffff);
+  background: -moz-linear-gradient(bottom, #ffffff);
+  background: linear-gradient(bottom, #ffffff);
+  position: relative;
+  z-index: 1;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.limite {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.container-tabla {
+  width: 103%;
+  /*Ancho*/
+  height: 50vh;
+  /*Altura minima*/
+  display: -webkit-box;
+  /*Pantalla en Chrome tipo caja*/
+  display: -webkit-flex;
+  /*Pantalla en Chrome tambien ser flexible*/
+  display: -moz-box;
+  /*Pantalla en Firefox tipo caja*/
+  display: -o-flexbox;
+  /*Pantalla en Opera caja flexible*/
+  display: flex;
+  /*Pantalla Flexible por defecto*/
+  flex-wrap: wrap;
+  justify-content: center;
+  /*Contenido justificado al centro */
+  align-items: center;
+  /*Contenido alineado al centro*/
+  padding: 15px;
+  /*Espaciado entre cada campo*/
+
+  background-repeat: no-repeat;
+  /*Fondo color solido*/
+  background-position: center;
+  /*Fondo centrado*/
+  background-size: cover;
+  /*Tamaño del fondo sera cubrir toda la pantalla*/
+  position: relative;
+  z-index: 1;
+}
+
+.container-tabla::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #69859ae6;
+}
+
+.form-tabla {
+  width: 100%;
+  /*Tamaño del formulario*/
+}
+
+.tabla-form-titulo {
+  font-size: 30px;
+  /*Tamaño del encabezado*/
+  color: #fff;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  /*Convertimos el texto de minuscula a mayusculas */
+
+  display: block;
+}
+
+Table {
+  background-color: white;
+}
+
+.inputid {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border  a ninguno*/
+
+  width: 4em;
+  border-radius: 5px;
+  display: block;
+}
+
+.input_Cantidad {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border  a ninguno*/
+
+  width: 7em;
+  height: 2em;
+  border-radius: 5px;
+  display: block;
+}
+
+.input_indicaciones {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border  a ninguno*/
+
+  width: 15em;
+  height: 3em;
+  border-radius: 5px;
+  display: block;
+}
+
+.input_fecha {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border  a ninguno*/
+
+  width: 7em;
+  height: 2em;
+  border-radius: 5px;
+  display: block;
+}
+
+.input_notas {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border  a ninguno*/
+
+  width: 10em;
+  height: 3em;
+  border-radius: 5px;
+  display: block;
+}
+
+#tabla1 {
+  overflow: scroll;
+  height: 65vh;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+button {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border a ninguno*/
+  background: transparent;
+  /*Cambiamos el relleno a transparente o ninguno*/
+  transition-duration: 0.4s;
+  /*Establecemo cuanto tardara el boton en cambiar de color al pasar el puntero sobre el */
+}
+
+button:hover {
+  /*Cambiamos el estado del boton al pasar sobre el puntero sobre el boton*/
+
+  cursor: pointer;
+  /*Cambiar el curso al pasar el puntero sobre el boton*/
+  background-color: black;
+  /*Cambiamos el color de fondo del boton*/
+  color: white;
+  /*Cambiamos el color de la letra del boton*/
+}
+
+.container-guardar-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  padding-top: 2em;
+}
+
+.guardar-form-btn {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  height: 40px;
+  border-radius: 25px;
+  background: white;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.container-guardar-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  padding-top: 2em;
+}
+
+.seleccion {
+  padding-left: 25em;
+}
+
+.combo {
+  width: 70%;
+}
+
+.buscar {
+  justify-content: right;
+}
+
+@media (max-width: 786px) {
+  #tabla1 {
+    overflow: scroll;
+    height: 40vh;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .container-tabla {
+    height: 40vh;
+  }
+
+  .Indicacion-movil {
+    width: 7em;
+  }
+
+  .notas-movil {
+    width: 7em;
+  }
+
+  .combo-nombre {
+    width: 7em;
+  }
+
+  /**********************/
+  .seleccion {
+    margin-left: 10%;
+  }
+
+  .combo {
+    width: 100%;
+  }
+
+  .buscar {
+    justify-content: center;
+  }
+}
