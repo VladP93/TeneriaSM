@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.p-b-34 {
+  padding-bottom: 34px;
+}
+
+/*Damos espacio entre logo y el titulo de iniciar sesion*/
+.p-t-27 {
+  padding-top: 27px;
+}
+
+body {
+  background: #69859a;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.content {
+  width: 260px;
+  margin: 25px auto;
+}
+
+.menu-header {
+  font-size: 30px; /*Tamaño del encabezado*/
+  color: #fff;
+  line-height: 1.2;
+  justify-items: center;
+  text-transform: uppercase; /*Convertimos el texto de minuscula a mayusculas */
+  display: block;
+}
+
+.menu {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: padding-box;
+  outline: 0;
+  min-width: 260px;
+  float: left;
+  position: relative;
+
+  background: #69859a;
+  z-index: 1;
+  justify-content: center;
+}
+
+button {
+  outline: none;
+  /*Cambiamos el contorno a ninguno*/
+  border: none;
+  /*Cambiamos el border a ninguno*/
+  background: transparent;
+  /*Cambiamos el relleno a transparente o ninguno*/
+  transition-duration: 0.4s;
+  /*Establecemo cuanto tardara el boton en cambiar de color al pasar el puntero sobre el */
+
+  padding: 20px 20px 20px 20px;
+
+  width: 10em;
+}
+
+button:hover {
+  /*Cambiamos el estado del boton al pasar sobre el puntero sobre el boton*/
+
+  cursor: pointer;
+  /*Cambiar el curso al pasar el puntero sobre el boton*/
+  background-color: #69859a;
+  /*Cambiamos el color de fondo del boton*/
+  color: white;
+  /*Cambiamos el color de la letra del boton*/
+}
+
+.menu-form-btn {
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+  justify-content: center !important;
+  align-items: center !important;
+  min-width: 120px;
+  height: 50px !important;
+  border-radius: 25px !important;
+  background: #ffffff;
+  background: -webkit-linear-gradient(bottom, #fff);
+  background: -o-linear-gradient(bottom, #ffffff);
+  background: -moz-linear-gradient(bottom, #ffffff);
+  background: linear-gradient(bottom, #ffffff);
+  position: relative;
+  z-index: 1;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.wrap-tabla {
+  width: 500px;
+  border-radius: 20px; /*Bordes redondos*/
+  overflow: hidden;
+  padding: 55px 55px 37px 55px; /*Espaciado de la izqierda, derecha, arriba y abajo*/
+
+  /*Fondo que tendra el cuadrado para que se vea uniforme en cualquier navegador*/
+
+  background: #14c4b0e6;
+  background: -webkit-linear-gradient(top, #14c4b0e6);
+  background: -o-linear-gradient(top, #14c4b0e6);
+  background: -moz-linear-gradient(top, #14c4b0e6);
+  background: linear-gradient(top, #14c4b0e6);
+}
+
+/*------------------------------------------------------------------
+[ Responsiva ]*/
+
+@media (max-width: 576px) {
+  .wrap-login100 {
+    padding: 55px 15px 37px 15px;
+  }
+}
