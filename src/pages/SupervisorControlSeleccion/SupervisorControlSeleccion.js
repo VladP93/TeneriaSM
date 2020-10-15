@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "../../components/supervisorControlSeleccion/Menu";
-import Procesos from "../../components/supervisorControlSeleccion/Procesos";
+import Procesos from "../../components/supervisores/Procesos";
 import ControlSeleccion from "../../components/supervisorControlSeleccion/ControlSeleccion";
 import "./supervisorControlSeleccion.css";
 

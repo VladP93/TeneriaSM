@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "../../components/supervisorGeneral/Menu";
+import Procesos from "../../components/supervisores/Procesos";
 import CrearProceso from "../../components/supervisorGeneral/CrearProceso";
 
 import "./supervisorGeneral.css";
