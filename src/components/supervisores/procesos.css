@@ -62,10 +62,10 @@ html {
   height: 38px;
   border-radius: 5px;
   background: #ffffff;
-  background: -webkit-linear-gradient(bottom, #fff);
-  background: -o-linear-gradient(bottom, #ffffff);
-  background: -moz-linear-gradient(bottom, #ffffff);
-  background: linear-gradient(bottom, #ffffff);
+  background: -webkit-linear-gradient(to top, #fff);
+  background: -o-linear-gradient(to top, #ffffff);
+  background: -moz-linear-gradient(to top, #ffffff);
+  background: linear-gradient(to top, #ffffff);
   position: relative;
   z-index: 1;
   -webkit-transition: all 0.4s;
