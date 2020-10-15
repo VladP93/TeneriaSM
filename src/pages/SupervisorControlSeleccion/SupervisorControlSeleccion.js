@@ -2,6 +2,7 @@ import React from "react";
 import Menu from "../../components/supervisorControlSeleccion/Menu";
 import Procesos from "../../components/supervisorControlSeleccion/Procesos";
 import ControlSeleccion from "../../components/supervisorControlSeleccion/ControlSeleccion";
+import "./supervisorControlSeleccion.css";
 
 export default function SupervisorControlSeleccion() {
   return (
