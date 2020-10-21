@@ -16,15 +16,11 @@ export default function Menu() {
                 <div className="menu-header">Menú </div>
                 <div className="activar p-t-27">
                   <a href="procesos.html" target="contenido">
-                    <button className="menu-form-btn  p-b-34 p-t-27">
-                      Proceso
-                    </button>
+                    <button className="menu-form-btn">Proceso</button>
                   </a>
                 </div>
                 <div className="activar p-t-27">
-                  <button className="menu-form-btn  p-b-34 p-t-27">
-                    Cerrar sesión
-                  </button>
+                  <button className="menu-form-btn ">Cerrar sesión</button>
                 </div>
               </ul>
             </div>
