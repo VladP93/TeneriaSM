@@ -1,16 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import Administrador from "./Administrador";
-import Operario from "./Operario";
-import SupervisorControlSeleccion from "./SupervisorControlSeleccion";
-import SupervisorGeneral from "./SupervisorGeneral";
-import SupervisorProcesos from "./SupervisorProcesos";
+import { Redirect, BrowserRouter as Router } from "react-router-dom";
+import Routes from "../routes/Routes";
 
 export default function Logged(props) {
-  const { user } = props;
+  const { rol } = props;
+
+  //supcontrolseleccion, supprocesos, administrador, supgeneral, operario
+  const handleRol = () => {
+    switch (rol) {
+      case "administrador":
+        return <Redirect to={{ pathname: "/administrador" }} />;
+      case "operario":
+        return <Redirect to={{ pathname: "/operario" }} />;
+      case "supcontrolseleccion":
+        return <Redirect to={{ pathname: "/supcontrolseleccion" }} />;
+      case "supgeneral":
+        return <Redirect to={{ pathname: "/supgeneral" }} />;
+      case "supprocesos":
+        return <Redirect to={{ pathname: "/supprocesos" }} />;
+      default:
+        return <h2>Cargando...</h2>;
+    }
+  };
+
   return (
-    <div>
-      <h2>Logged</h2>
-    </div>
+    <Router>
+      <Routes rol={rol} />
+      {handleRol()}
+    </Router>
   );
 }

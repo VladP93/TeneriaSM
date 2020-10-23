@@ -14,8 +14,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [rol, setRol] = useState("");
 
-  console.log(rol);
-
   useEffect(() => {
     if (user) {
       db.collection("Roles")
@@ -52,7 +50,7 @@ function App() {
         {!user ? (
           <Login setRol={setRol} setUser={setUser} />
         ) : (
-          <Logged user={user} />
+          <Logged user={user} rol={rol} />
         )}
       </div>
     </>
