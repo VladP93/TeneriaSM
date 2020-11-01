@@ -1,7 +1,9 @@
 import React from "react";
 import "./tablaOperaciones.css";
 
-export default function TablaOperaciones() {
+export default function TablaOperaciones(props) {
+  const { setTab } = props;
+
   return (
     <div>
       <div className="limite" style={{ backgroundColor: "#69859A" }}>
@@ -110,14 +112,13 @@ export default function TablaOperaciones() {
             </div>
 
             <span>
-              <a href="nueva_operacion.html" target="contenido">
-                <button
-                  className="guardar-form-btn proceso1"
-                  style={{ marginRight: 25, width: 150, marginTop: 25 }}
-                >
-                  Agregar operacion
-                </button>
-              </a>
+              <button
+                className="guardar-form-btn proceso1"
+                style={{ marginRight: 25, width: 200, marginTop: 25 }}
+                onClick={() => setTab("operacionesForm")}
+              >
+                Agregar operacion
+              </button>
             </span>
           </div>
         </div>

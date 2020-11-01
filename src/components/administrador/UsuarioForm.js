@@ -21,7 +21,10 @@ export default function UsuarioForm() {
                 />
               </span>
 
-              <span className="registro-form-titulo p-b-34 p-t-27">
+              <span
+                className="registro-form-titulo"
+                style={{ marginBottom: 10 }}
+              >
                 Registrar Usuario
               </span>
 
@@ -89,7 +92,7 @@ export default function UsuarioForm() {
                 <button className="registro-form-btn">Registrar Usuario</button>
               </div>
             </form>
-            <div id="error"></div>
+            <div id="error" style={{ marginBottom: -15 }}></div>
           </div>
         </div>
       </div>

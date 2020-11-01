@@ -1,7 +1,9 @@
 import React from "react";
 import "./tablaOperaciones.css";
 
-export default function TablaUsuarios() {
+export default function TablaUsuarios(props) {
+  const { setTab } = props;
+
   return (
     <div>
       <div className="limite" style={{ backgroundColor: "#69859A" }}>
@@ -148,14 +150,13 @@ export default function TablaUsuarios() {
             </div>
 
             <span>
-              <a href="Registra_usuario.html" target="contenido">
-                <button
-                  className="guardar-form-btn proceso1"
-                  style={{ marginRight: 25, width: 150, marginTop: 25 }}
-                >
-                  Agregar Usuario
-                </button>
-              </a>
+              <button
+                className="guardar-form-btn proceso1"
+                style={{ marginRight: 25, width: 200, marginTop: 25 }}
+                onClick={() => setTab("usuariosForm")}
+              >
+                Agregar Usuario
+              </button>
             </span>
           </div>
         </div>

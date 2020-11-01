@@ -14,8 +14,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [rol, setRol] = useState("");
 
-  console.log(user);
-
   useEffect(() => {
     if (user) {
       db.collection("Roles")

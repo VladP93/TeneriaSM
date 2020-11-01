@@ -6,7 +6,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 export default function Menu(props) {
-  const { setUser } = props;
+  const { setUser, setTab } = props;
 
   const logout = () => {
     setUser(null);
@@ -26,24 +26,29 @@ export default function Menu(props) {
                 <div className="menu-header">Menú </div>
 
                 <div className="activar p-t-27">
-                  <a href="Tabla_Operaciones.html" target="contenido">
-                    <button className="menu-form-btn">
-                      Gestionar Operaciones
-                    </button>
-                  </a>
+                  <button
+                    className="menu-form-btn"
+                    onClick={() => setTab("operaciones")}
+                  >
+                    Gestionar Operaciones
+                  </button>
                 </div>
 
                 <div className="activar p-t-27">
-                  <a href="Tabla_usuarios.html" target="contenido">
-                    <button className="menu-form-btn">
-                      Gestionar Usuarios
-                    </button>
-                  </a>
+                  <button
+                    className="menu-form-btn"
+                    onClick={() => setTab("usuarios")}
+                  >
+                    Gestionar Usuarios
+                  </button>
                 </div>
                 <div className="activar p-t-27">
-                  <a href="datos_empaque.html" target="contenido">
-                    <button className="menu-form-btn">Datos de empaque</button>
-                  </a>
+                  <button
+                    className="menu-form-btn"
+                    onClick={() => setTab("empaque")}
+                  >
+                    Datos de empaque
+                  </button>
                 </div>
                 <div className="activar p-t-27">
                   <button className="menu-form-btn" onClick={logout}>

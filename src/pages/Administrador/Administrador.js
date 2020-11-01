@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "../../components/administrador/Menu";
 import TablaOperaciones from "../../components/administrador/TablaOperaciones";
 import TablaUsuarios from "../../components/administrador/TablaUsuarios";
@@ -10,15 +10,31 @@ import "./Administrador.css";
 
 export default function Administrador(props) {
   const { setUser } = props;
+  const [tab, setTab] = useState(null);
+
+  const handleTab = () => {
+    switch (tab) {
+      case "operaciones":
+        return <TablaOperaciones setTab={setTab} />;
+      case "usuarios":
+        return <TablaUsuarios setTab={setTab} />;
+      case "empaque":
+        return <DatosEmpaque />;
+      case "operacionesForm":
+        return <OperacionForm />;
+      case "usuariosForm":
+        return <UsuarioForm />;
+      default:
+        return <div />;
+    }
+  };
 
   return (
     <div className="main-container">
       <div className="menu-container">
-        <Menu setUser={setUser} />
+        <Menu setUser={setUser} setTab={setTab} />
       </div>
-      <div className="contenido-container">
-        <UsuarioForm />
-      </div>
+      <div className="contenido-container">{handleTab()}</div>
     </div>
   );
 }

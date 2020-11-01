@@ -7,7 +7,7 @@ import "firebase/firestore";
 import "./menu.css";
 
 export default function Menu(props) {
-  const { setUser } = props;
+  const { setUser, setTab } = props;
 
   const logout = () => {
     setUser(null);
@@ -26,14 +26,20 @@ export default function Menu(props) {
                 </div>
                 <div className="menu-header">Menu </div>
                 <div className="activar p-t-27">
-                  <a href="procesos.html" target="contenido">
-                    <button className="menu-form-btn">Procesos</button>
-                  </a>
+                  <button
+                    className="menu-form-btn"
+                    onClick={() => setTab("procesos")}
+                  >
+                    Procesos
+                  </button>
                 </div>
                 <div className="activar p-t-27">
-                  <a href="control_seleccion.html" target="contenido">
-                    <button className="menu-form-btn">Control Selección</button>
-                  </a>
+                  <button
+                    className="menu-form-btn"
+                    onClick={() => setTab("controlSeleccion")}
+                  >
+                    Control Selección
+                  </button>
                 </div>
                 <div className="activar p-t-27">
                   <button className="menu-form-btn" onClick={logout}>
