@@ -1,25 +1,37 @@
 import React from "react";
 import logo from "../../assets/logo.jpeg";
+import firebase from "../../utils/Firebase";
+import "firebase/auth";
+import "firebase/firestore";
 
-export default function Menu() {
+export default function Menu(props) {
+  const { setUser } = props;
+
+  const logout = () => {
+    setUser(null);
+    firebase.auth().signOut();
+  };
+
   return (
     <div>
-      <div class="row affix-row">
-        <div class="col-sm-4 col-md-12 affix-sidebar">
-          <div class="content">
-            <div class="menu">
+      <div className="row affix-row">
+        <div className="col-sm-4 col-md-12 affix-sidebar">
+          <div className="content">
+            <div className="menu">
               <ul>
-                <div class=" perfil p-b-34 p-t-27">
+                <div className=" perfil p-b-34 p-t-27">
                   <img src={logo} alt="" width="150" />
                 </div>
-                <div class="menu-header">Menu </div>
-                <div class="activar p-t-27">
+                <div className="menu-header">Menu </div>
+                <div className="activar p-t-27">
                   <a href="procesos.html" target="contenido">
-                    <button class="menu-form-btn">Procesos</button>
+                    <button className="menu-form-btn">Procesos</button>
                   </a>
                 </div>
-                <div class="activar p-t-27">
-                  <button class="menu-form-btn">Cerrar sesión</button>
+                <div className="activar p-t-27">
+                  <button className="menu-form-btn" onClick={logout}>
+                    Cerrar sesión
+                  </button>
                 </div>
               </ul>
             </div>

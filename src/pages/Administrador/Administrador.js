@@ -8,11 +8,13 @@ import UsuarioForm from "../../components/administrador/UsuarioForm";
 
 import "./Administrador.css";
 
-export default function Administrador() {
+export default function Administrador(props) {
+  const { setUser } = props;
+
   return (
     <div className="main-container">
       <div className="menu-container">
-        <Menu />
+        <Menu setUser={setUser} />
       </div>
       <div className="contenido-container">
         <UsuarioForm />

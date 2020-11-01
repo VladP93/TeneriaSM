@@ -1,9 +1,19 @@
 import React from "react";
 import logo from "../../assets/logo.jpeg";
+import firebase from "../../utils/Firebase";
+import "firebase/auth";
+import "firebase/firestore";
 
 import "./menu.css";
 
-export default function Menu() {
+export default function Menu(props) {
+  const { setUser } = props;
+
+  const logout = () => {
+    setUser(null);
+    firebase.auth().signOut();
+  };
+
   return (
     <div>
       <div className="row affix-row">
@@ -26,7 +36,9 @@ export default function Menu() {
                   </a>
                 </div>
                 <div className="activar p-t-27">
-                  <button className="menu-form-btn">Cerrar sesión</button>
+                  <button className="menu-form-btn" onClick={logout}>
+                    Cerrar sesión
+                  </button>
                 </div>
               </ul>
             </div>

@@ -3,7 +3,7 @@ import { Redirect, BrowserRouter as Router } from "react-router-dom";
 import Routes from "../routes/Routes";
 
 export default function Logged(props) {
-  const { rol } = props;
+  const { rol, setUser } = props;
 
   //supcontrolseleccion, supprocesos, administrador, supgeneral, operario
   const handleRol = () => {
@@ -25,7 +25,7 @@ export default function Logged(props) {
 
   return (
     <Router>
-      <Routes rol={rol} />
+      <Routes rol={rol} setUser={setUser} />
       {handleRol()}
     </Router>
   );

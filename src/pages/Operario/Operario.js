@@ -4,11 +4,13 @@ import Procesos from "../../components/operario/Procesos";
 
 import "./Operario.css";
 
-export default function Operario() {
+export default function Operario(props) {
+  const { setUser } = props;
+
   return (
     <div className="main-container">
       <div className="menu-container">
-        <Menu />
+        <Menu setUser={setUser} />
       </div>
       <div className="contenido-container">
         <Procesos />

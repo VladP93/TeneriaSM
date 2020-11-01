@@ -9,24 +9,24 @@ import SupervisorGeneral from "../pages/SupervisorGeneral";
 import SupervisorProcesos from "../pages/SupervisorProcesos";
 
 export default function Routes(props) {
-  const { rol } = props;
+  const { rol, setUser } = props;
 
   return (
     <Switch>
       <Route path="/administrador" exact>
-        <Administrador rol={rol} />
+        <Administrador rol={rol} setUser={setUser} />
       </Route>
       <Route path="/operario" exact>
-        <Operario />
+        <Operario setUser={setUser} />
       </Route>
       <Route path="/supcontrolseleccion" exact>
-        <SupervisorContorlSeleccion rol={rol} />
+        <SupervisorContorlSeleccion rol={rol} setUser={setUser} />
       </Route>
       <Route path="/supgeneral" exact>
-        <SupervisorGeneral rol={rol} />
+        <SupervisorGeneral rol={rol} setUser={setUser} />
       </Route>
       <Route path="/supprocesos" exact>
-        <SupervisorProcesos rol={rol} />
+        <SupervisorProcesos rol={rol} setUser={setUser} />
       </Route>
       <Route path="">
         <h2>No permitido!</h2>

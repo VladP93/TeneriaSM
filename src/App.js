@@ -14,6 +14,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [rol, setRol] = useState("");
 
+  console.log(user);
+
   useEffect(() => {
     if (user) {
       db.collection("Roles")
@@ -33,24 +35,13 @@ function App() {
     setUser(currentUser);
   });
 
-  const logout = () => {
-    setUser(null);
-    firebase.auth().signOut();
-  };
-
   return (
     <>
-      <input
-        type="button"
-        value="logout"
-        className="btn btn-warning"
-        onClick={logout}
-      />
       <div className="App">
         {!user ? (
           <Login setRol={setRol} setUser={setUser} />
         ) : (
-          <Logged user={user} rol={rol} />
+          <Logged user={user} setUser={setUser} rol={rol} />
         )}
       </div>
     </>
