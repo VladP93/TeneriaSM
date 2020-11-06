@@ -44,6 +44,8 @@ export default function UsuarioForm(props) {
         var update = { displayName: `${formData.nombre} ${formData.apellido}` };
 
         newUser.rol = formData.rol;
+        newUser.nombre = formData.nombre;
+        newUser.apellido = formData.apellido;
         newUser.uid = res.user.uid;
         firebase
           .auth()

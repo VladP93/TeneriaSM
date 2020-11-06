@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./tablaOperaciones.css";
+
+import firebase from "../../utils/Firebase";
+import "firebase/firestore";
+
+const db = firebase.firestore(firebase);
 
 export default function TablaOperaciones(props) {
   const { setTab } = props;
+  const [operaciones, setOperaciones] = useState([]);
+
+  useEffect(() => {
+    db.collection("operaciones")
+      .get()
+      .then((res) => {
+        var tempOps = [];
+        res.docs.forEach((ops) => {
+          var newOp = ops.data();
+          newOp.id = ops.id;
+          tempOps.push(newOp);
+        });
+        setOperaciones(tempOps);
+      });
+  }, []);
 
   return (
     <div>
@@ -15,97 +35,31 @@ export default function TablaOperaciones(props) {
                 <table className="table table-striped table-bordered table-dark">
                   <thead>
                     <tr>
-                      <th># </th>
+                      <th>ID</th>
                       <th>Nombre de Operacion</th>
                       <th> Indicacion</th>
                     </tr>
                   </thead>
-
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-
-                      <td>
-                        <button className="tabla-form-btn">Eliminar</button>
-                      </td>
-                      <td>
-                        <a href="modificar_operacion.html">
-                          <button className="tabla-form-btn">Modificar</button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-
-                      <td>
-                        <button className="tabla-form-btn">Eliminar</button>
-                      </td>
-                      <td>
-                        <a href="modificar_operacion.html">
-                          <button className="tabla-form-btn">Modificar</button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-
-                      <td>
-                        <button className="tabla-form-btn">Eliminar</button>
-                      </td>
-                      <td>
-                        <a href="modificar_operacion.html">
-                          <button className="tabla-form-btn">Modificar</button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-
-                      <td>
-                        <button className="tabla-form-btn">Eliminar</button>
-                      </td>
-                      <td>
-                        <a href="modificar_operacion.html">
-                          <button className="tabla-form-btn">Modificar</button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-
-                      <td>
-                        <button className="tabla-form-btn">Eliminar</button>
-                      </td>
-                      <td>
-                        <a href="modificar_operacion.html">
-                          <button className="tabla-form-btn">Modificar</button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-
-                      <td>
-                        <button className="tabla-form-btn">Eliminar</button>
-                      </td>
-                      <td>
-                        <a href="modificar_operacion.html">
-                          <button className="tabla-form-btn">Modificar</button>
-                        </a>
-                      </td>
-                    </tr>
+                    {operaciones.map((op) => {
+                      return (
+                        <tr key={op.id}>
+                          <td style={{ fontSize: 12 }}>{op.id}</td>
+                          <td>{op.Nombre}</td>
+                          <td>{op.Indicacion}</td>
+                          <td>
+                            <button className="tabla-form-btn">Eliminar</button>
+                          </td>
+                          <td>
+                            <a href="modificar_operacion.html">
+                              <button className="tabla-form-btn">
+                                Modificar
+                              </button>
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

@@ -115,12 +115,13 @@ button:hover {
 }
 
 .tabla-form-btn {
+  display: flex;
   font-size: 16px;
   color: black;
   line-height: 1.2;
-  justify-content: center;
-  align-items: center;
-  min-width: 80px;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100px;
   height: 40px;
   border-radius: 25px;
   background: white;
