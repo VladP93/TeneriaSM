@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      db.collection("Roles")
+      db.collection("RolesUsuario")
         .where("uid", "==", user.uid)
         .get()
         .then((res) => {

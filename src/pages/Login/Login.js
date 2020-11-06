@@ -10,7 +10,7 @@ export default function Login(props) {
   const { setUser } = props;
   const [formData, setFormData] = useState(defaultValues());
 
-  const onChange = (e, type) => {
+  const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -23,10 +23,10 @@ export default function Login(props) {
       .signInWithEmailAndPassword(formData.Usuario, formData.Contrasena)
       .then((response) => {
         setUser(response.user);
-        Swal.fire(`Bienvenido ${formData.Usuario}`);
+        Swal.fire(`Bienvenido ${firebase.auth().currentUser.displayName}`);
       })
       .catch((err) => {
-        Swal.fire("Error", "Credenciales incorrectas", "error");
+        Swal.fire("Error", "El error: " + err.message, "error");
       });
 
     event.preventDefault();

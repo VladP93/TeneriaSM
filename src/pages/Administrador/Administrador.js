@@ -23,7 +23,7 @@ export default function Administrador(props) {
       case "operacionesForm":
         return <OperacionForm />;
       case "usuariosForm":
-        return <UsuarioForm />;
+        return <UsuarioForm setUser={setUser} setTab={setTab} />;
       default:
         return <div />;
     }
