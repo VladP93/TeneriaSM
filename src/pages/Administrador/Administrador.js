@@ -21,7 +21,7 @@ export default function Administrador(props) {
       case "empaque":
         return <DatosEmpaque />;
       case "operacionesForm":
-        return <OperacionForm />;
+        return <OperacionForm setTab={setTab} />;
       case "usuariosForm":
         return <UsuarioForm setUser={setUser} setTab={setTab} />;
       default:

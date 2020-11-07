@@ -8,7 +8,8 @@ import "firebase/firestore";
 
 const db = firebase.firestore(firebase);
 
-export default function OperacionForm() {
+export default function OperacionForm(props) {
+  const { setTab } = props;
   const [formData, setFormData] = useState(defaultValues());
 
   const onChange = (e) => {
@@ -28,6 +29,7 @@ export default function OperacionForm() {
           `La operacion ${formData.Nombre} ha sido agregada exitosamente`,
           "success"
         );
+        setTab("operaciones");
       })
       .catch((err) => {
         Swal.fire(

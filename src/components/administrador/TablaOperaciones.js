@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./tablaOperaciones.css";
+import ModalOperaciones from "./ModalOperaciones";
+import Swal from "sweetalert2";
 
 import firebase from "../../utils/Firebase";
 import "firebase/firestore";
@@ -9,6 +11,8 @@ const db = firebase.firestore(firebase);
 export default function TablaOperaciones(props) {
   const { setTab } = props;
   const [operaciones, setOperaciones] = useState([]);
+  const [op, setOp] = useState({ Nombre: "", Indicacion: "" });
+  const [refreshData, setRefreshData] = useState(false);
 
   useEffect(() => {
     db.collection("operaciones")
@@ -22,7 +26,47 @@ export default function TablaOperaciones(props) {
         });
         setOperaciones(tempOps);
       });
-  }, []);
+    setRefreshData(false);
+  }, [refreshData]);
+
+  const editOnClick = (op) => {
+    setOp(op);
+  };
+
+  const deleteOnClick = (op) => {
+    Swal.fire({
+      title: "¿Está seguro que desea eliminar " + op.Nombre + "?",
+      text: "Esta acción no puede deshacerse",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Borrar",
+    }).then((result) => {
+      if (result.value) {
+        db.collection("operaciones")
+          .doc(op.id)
+          .delete()
+          .then(() => {
+            Swal.fire(
+              "Indicación Eliminada",
+              op.Nombre + " ha sido eliminada",
+              "success"
+            );
+            setRefreshData(true);
+          })
+          .catch((err) => {
+            Swal.fire("Algo salió mal", "Erro: " + err, "error");
+          });
+      } else {
+        Swal.fire(
+          "Cancelado",
+          "El item: " + op.Nombre + " no se ha eliminado",
+          "error"
+        );
+      }
+    });
+  };
 
   return (
     <div>
@@ -48,14 +92,24 @@ export default function TablaOperaciones(props) {
                           <td>{op.Nombre}</td>
                           <td>{op.Indicacion}</td>
                           <td>
-                            <button className="tabla-form-btn">Eliminar</button>
+                            <button
+                              className="tabla-form-btn"
+                              onClick={() => deleteOnClick(op)}
+                            >
+                              Eliminar
+                            </button>
                           </td>
                           <td>
-                            <a href="modificar_operacion.html">
-                              <button className="tabla-form-btn">
-                                Modificar
-                              </button>
-                            </a>
+                            <button
+                              className="tabla-form-btn"
+                              data-toggle="modal"
+                              data-target="#modalOps"
+                              onClick={() => {
+                                editOnClick(op);
+                              }}
+                            >
+                              Modificar
+                            </button>
                           </td>
                         </tr>
                       );
@@ -77,6 +131,7 @@ export default function TablaOperaciones(props) {
           </div>
         </div>
       </div>
+      <ModalOperaciones op={op} setRefreshData={setRefreshData} />
     </div>
   );
 }
