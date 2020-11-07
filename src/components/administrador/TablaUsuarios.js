@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./tablaOperaciones.css";
+import ModalUsuarios from "./ModalUsuarios";
+import Swal from "sweetalert2";
 
 import firebase from "../../utils/Firebase";
 import "firebase/firestore";
@@ -9,6 +11,13 @@ const db = firebase.firestore(firebase);
 export default function TablaUsuarios(props) {
   const { setTab } = props;
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({
+    nombre: "",
+    apellido: "",
+    rol: "Seleccione un rol",
+    uid: "",
+  });
+  const [refreshData, setRefreshData] = useState(false);
 
   useEffect(() => {
     db.collection("RolesUsuario")
@@ -23,7 +32,47 @@ export default function TablaUsuarios(props) {
         });
         setUsers(tempUsers);
       });
-  }, []);
+    setRefreshData(false);
+  }, [refreshData]);
+
+  const editOnClick = (u) => {
+    setUser(u);
+  };
+
+  const deleteOnClick = (u) => {
+    Swal.fire({
+      title: "¿Está seguro que desea eliminar a " + u.nombre + "?",
+      text: "Esta acción no puede deshacerse",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Borrar",
+    }).then((result) => {
+      if (result.value) {
+        db.collection("RolesUsuario")
+          .doc(u.id)
+          .delete()
+          .then(() => {
+            Swal.fire(
+              "Usuario Eliminado",
+              u.nombre + " ha sido eliminado",
+              "success"
+            );
+            setRefreshData(true);
+          })
+          .catch((err) => {
+            Swal.fire("Algo salió mal", "Erro: " + err, "error");
+          });
+      } else {
+        Swal.fire(
+          "Cancelado",
+          "Usuario: " + u.nombre + " no se ha eliminado",
+          "error"
+        );
+      }
+    });
+  };
 
   return (
     <div>
@@ -51,14 +100,24 @@ export default function TablaUsuarios(props) {
                           <td>{user.apellido}</td>
                           <td>{user.rol}</td>
                           <td style={{ height: 50 }}>
-                            <button className="tabla-form-btn">Eliminar</button>
+                            <button
+                              className="tabla-form-btn"
+                              onClick={() => deleteOnClick(user)}
+                            >
+                              Eliminar
+                            </button>
                           </td>
                           <td>
-                            <a href="modificar_usuario.html">
-                              <button className="tabla-form-btn">
-                                Modificar
-                              </button>
-                            </a>
+                            <button
+                              className="tabla-form-btn"
+                              data-toggle="modal"
+                              data-target="#modalOps"
+                              onClick={() => {
+                                editOnClick(user);
+                              }}
+                            >
+                              Modificar
+                            </button>
                           </td>
                         </tr>
                       );
@@ -80,6 +139,7 @@ export default function TablaUsuarios(props) {
           </div>
         </div>
       </div>
+      <ModalUsuarios user={user} setRefreshData={setRefreshData} />
     </div>
   );
 

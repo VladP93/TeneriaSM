@@ -10,7 +10,7 @@ import "firebase/auth";
 const db = firebase.firestore(firebase);
 
 export default function UsuarioForm(props) {
-  const { setTab } = props;
+  const { setTab, setUser } = props;
   const [formData, setFormData] = useState(defaultValues());
   const [roles, setRoles] = useState([]);
 
@@ -39,7 +39,6 @@ export default function UsuarioForm(props) {
       .auth()
       .createUserWithEmailAndPassword(formData.usuario, formData.contrasena)
       .then((res) => {
-        console.log(res.user.uid);
         var newUser = {};
         var update = { displayName: `${formData.nombre} ${formData.apellido}` };
 
@@ -63,6 +62,9 @@ export default function UsuarioForm(props) {
                 );
                 if (formData.rol === "administrador") {
                   setTab(null);
+                } else {
+                  setUser(null);
+                  firebase.auth().signOut();
                 }
               })
               .catch((e) => {

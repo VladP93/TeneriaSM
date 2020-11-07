@@ -89,7 +89,7 @@ export default function ModalOperaciones(props) {
                 <span className="login-form-title">Nueva operación</span>
 
                 <div className="wrap-input ">
-                  <label for="id">Id:</label>
+                  <label htmlFor="id">Id:</label>
                   <input
                     className="form-control"
                     type="text"
@@ -101,7 +101,7 @@ export default function ModalOperaciones(props) {
                   <span className="focus-input"></span>
                 </div>
                 <div className="wrap-input ">
-                  <label for="nombre">Nombre:</label>
+                  <label htmlFor="nombre">Nombre:</label>
                   <input
                     className="form-control"
                     type="text"
@@ -112,7 +112,7 @@ export default function ModalOperaciones(props) {
                   <span className="focus-input"></span>
                 </div>
                 <div className="wrap-input ">
-                  <label for="indicacion">Indicación:</label>
+                  <label htmlFor="indicacion">Indicación:</label>
                   <input
                     className="form-control"
                     type="text"
