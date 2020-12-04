@@ -1,7 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 import "./datosEmpaque.css";
 
+import firebase from "../../utils/Firebase";
+import "firebase/firestore";
+
+const db = firebase.firestore(firebase);
+
 export default function DatosEmpaque() {
+  const [formData, setFormData] = useState(defaultValues());
+
+  const onChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    db.collection("datosEmpaque")
+      .add(formData)
+      .then(() => {
+        Swal.fire(
+          "Empaque agregado",
+          `El empaque ${formData.articuloFinal} ha sido agregado exitosamente`,
+          "success"
+        );
+      })
+      .catch((err) => {
+        Swal.fire(
+          "Error",
+          `Los datos del empaque ${
+            formData.articuloFinal
+          } no se ha agregado error: ${JSON.stringify(err)}`,
+          "error"
+        );
+      });
+
+    event.preventDefault();
+    event.target.reset();
+  };
+
   return (
     <div>
       <div className="limite">
@@ -19,14 +58,14 @@ export default function DatosEmpaque() {
                 <div className="col-xs-6 col-sm-12 col-md-12 col-sm-offset-2">
                   <div className=""></div>
                   <div className="panel-body">
-                    <form>
+                    <form onSubmit={handleSubmit} onChange={onChange}>
                       <div className="row">
                         <div className="col-xs-6 col-sm-6 col-md-6">
                           <div className="form-group">
                             <label>Articulo Final</label>
                             <input
                               type="text"
-                              name="Articulo"
+                              name="articuloFinal"
                               className="form-control input-sm"
                               placeholder="Articulo Final"
                               required=""
@@ -40,7 +79,7 @@ export default function DatosEmpaque() {
                             <label>Orden N°</label>
                             <input
                               type="text"
-                              name="Orden"
+                              name="ordenNo"
                               className="form-control input-sm"
                               placeholder="Orden"
                               pattern="[0-9]+"
@@ -55,7 +94,7 @@ export default function DatosEmpaque() {
                             <label>Cliente</label>
                             <input
                               type="text"
-                              name="Cliente"
+                              name="cliente"
                               className="form-control input-sm"
                               placeholder="Cliente"
                               required=""
@@ -69,7 +108,7 @@ export default function DatosEmpaque() {
                             <label>Codigo de Articulo</label>
                             <input
                               type="text"
-                              name="Codigo"
+                              name="codigoArticulo"
                               className="form-control input-sm"
                               placeholder="Codigo"
                             />
@@ -84,7 +123,7 @@ export default function DatosEmpaque() {
                             <label>Codigo de Origen</label>
                             <input
                               type="text"
-                              name="Cod_Origen"
+                              name="codigoOrigen"
                               className="form-control input-sm"
                               placeholder="Cod Origen"
                               required=""
@@ -98,7 +137,7 @@ export default function DatosEmpaque() {
                             <label>Form de Empaque</label>
                             <input
                               type="text"
-                              name="Empaque"
+                              name="formDeEmpaque"
                               className="form-control input-sm"
                               placeholder="Empaque"
                             />
@@ -112,7 +151,7 @@ export default function DatosEmpaque() {
                             <label>Cubo #</label>
                             <input
                               type="text"
-                              name="cubo"
+                              name="cuboNo"
                               className="form-control input-sm"
                               placeholder="cubo"
                             />
@@ -124,7 +163,7 @@ export default function DatosEmpaque() {
                             <label>Acabado</label>
                             <input
                               type="text"
-                              name="Acabado"
+                              name="acabado"
                               className="form-control input-sm"
                               placeholder="Acabado"
                             />
@@ -145,4 +184,17 @@ export default function DatosEmpaque() {
       </div>
     </div>
   );
+
+  function defaultValues() {
+    return {
+      articuloFinal: "",
+      ordenNo: "",
+      cliente: "",
+      codigoArticulo: "",
+      codigoOrigen: "",
+      formDeEmpaque: "",
+      cuboNo: "",
+      acabado: "",
+    };
+  }
 }
