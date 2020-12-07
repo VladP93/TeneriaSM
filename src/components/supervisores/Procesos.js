@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "./procesos.css";
 
+import firebase from "../../utils/Firebase";
+import "firebase/firestore";
+
+const db = firebase.firestore(firebase);
+
 export default function Procesos() {
+  const [procesos, setProcesos] = useState([]);
+  const [refreshData, setRefreshData] = useState(false);
+
+  useEffect(() => {
+    db.collection("procesos")
+      .get()
+      .then((res) => {
+        var tempProcesos = [];
+        res.docs.forEach((proceso) => {
+          var newProceso = proceso.data();
+          newProceso.id = proceso.id;
+          tempProcesos.push(newProceso);
+        });
+        setProcesos(tempProcesos);
+      });
+    setRefreshData(false);
+  }, [refreshData]);
+
   return (
     <div>
       <div className="limite" style={{ backgroundColor: "#69859A" }}>
@@ -24,8 +47,14 @@ export default function Procesos() {
                       <th>notas</th>
                     </tr>
                   </thead>
-
                   <tbody>
+                    {/* {procesos.map((proceso)=>{
+                      return(
+                        <tr key={proceso.id}>
+                          
+                        </tr>
+                      )
+                    })} */}
                     <tr>
                       <td>
                         <div className="wrap-input ">

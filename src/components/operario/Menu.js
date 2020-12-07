@@ -11,6 +11,7 @@ export default function Menu(props) {
   const logout = () => {
     setUser(null);
     firebase.auth().signOut();
+    window.location.href = "/";
   };
 
   return (

@@ -1,8 +1,47 @@
-import React from "react";
-
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 import "./crearProceso.css";
 
+import firebase from "../../utils/Firebase";
+import "firebase/firestore";
+
+const db = firebase.firestore(firebase);
+
 export default function CrearProceso() {
+  const [formData, setFormData] = useState(defaultValues());
+
+  const onChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    formData.estado = "iniciado";
+    db.collection("procesos")
+      .add(formData)
+      .then(() => {
+        Swal.fire(
+          "Proceso agregado",
+          `El proceso ha sido agregado exitosamente`,
+          "success"
+        );
+      })
+      .catch((err) => {
+        Swal.fire(
+          "Error",
+          `Los datos del proceso no se han agregado error: ${JSON.stringify(
+            err
+          )}`,
+          "error"
+        );
+      });
+
+    event.preventDefault();
+    event.target.reset();
+  };
+
   return (
     <div>
       <div className="limite">
@@ -18,14 +57,14 @@ export default function CrearProceso() {
                 <div className="col-xs-6 col-sm-12 col-md-12 col-sm-offset-2">
                   <div className=""></div>
                   <div className="panel-body">
-                    <form>
+                    <form onSubmit={handleSubmit} onChange={onChange}>
                       <div className="row">
                         <div className="col-xs-6 col-sm-6 col-md-6">
                           <div className="form-group">
                             <label>Articulo</label>
                             <input
                               type="text"
-                              name="Articulo"
+                              name="articulo"
                               className="form-control input-sm"
                               placeholder="Articulo"
                             />
@@ -90,7 +129,7 @@ export default function CrearProceso() {
                             <label>Cantidad</label>
                             <input
                               type="text"
-                              name="Cantidad"
+                              name="cantidad"
                               className="form-control input-sm"
                               placeholder="Cantidad"
                             />
@@ -104,7 +143,7 @@ export default function CrearProceso() {
                             <label>Espesor</label>
                             <input
                               type="text"
-                              name="Espesor"
+                              name="espesor"
                               className="form-control input-sm"
                               placeholder="Espesor"
                             />
@@ -116,7 +155,7 @@ export default function CrearProceso() {
                             <label>Traslado</label>
                             <input
                               type="text"
-                              name="Translado"
+                              name="traslado"
                               className="form-control input-sm"
                               placeholder="Traslado N°"
                             />
@@ -139,4 +178,21 @@ export default function CrearProceso() {
       </div>
     </div>
   );
+
+  function defaultValues() {
+    return {
+      articulo: "",
+      fecha: "",
+      color: "",
+      lote: "",
+      seleccion: "",
+      cantidad: "",
+      espesor: "",
+      traslado: "",
+      //operacion
+      //indicacion
+      //nombreOperacion
+      //notas
+    };
+  }
 }
