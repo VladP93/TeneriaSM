@@ -19,7 +19,7 @@ export default function CrearProceso() {
 
   const handleSubmit = (event) => {
     formData.estado = "iniciado";
-    db.collection("procesos")
+    db.collection("procesosControl")
       .add(formData)
       .then(() => {
         Swal.fire(
