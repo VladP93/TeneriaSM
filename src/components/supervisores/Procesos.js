@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 import "./procesos.css";
 
@@ -10,9 +11,13 @@ const db = firebase.firestore(firebase);
 export default function Procesos() {
   const [procesos, setProcesos] = useState([]);
   const [refreshData, setRefreshData] = useState(false);
+  const [indicacion, setIndicacion] = useState("");
+  const [observacion, setObservacion] = useState("");
+  const [idFinalizar, setIdFinalizar] = useState("");
 
   useEffect(() => {
     db.collection("procesos")
+      .orderBy("fecha")
       .get()
       .then((res) => {
         var tempProcesos = [];
@@ -21,10 +26,61 @@ export default function Procesos() {
           newProceso.id = proceso.id;
           tempProcesos.push(newProceso);
         });
-        setProcesos(tempProcesos);
+        setProcesos(tempProcesos.reverse());
       });
     setRefreshData(false);
   }, [refreshData]);
+
+  const onChangeIndicacion = (e) => {
+    setIndicacion(e.target.value);
+  };
+
+  const onChangeObservacion = (e) => {
+    setObservacion(e.target.value);
+  };
+
+  const onChangeFinalizar = (e) => {
+    setIdFinalizar(e.target.value);
+  };
+
+  const onClickOk = (id) => {
+    db.collection("procesos")
+      .doc(id)
+      .update({ indicacion })
+      .then(() => {
+        Swal.fire(
+          "Proceso actualizado",
+          `El proceso ha sido actualizado exitosamente`,
+          "success"
+        );
+      })
+      .catch((err) => {
+        Swal.fire("Error", "El procesos no se ha podido actualizar", "error");
+      });
+    setRefreshData(true);
+  };
+
+  const onClickFinalizar = () => {
+    if (idFinalizar === "" || idFinalizar === "Seleccione proceso") {
+      Swal.fire("Error", "Seleccione un proceso", "error");
+    } else {
+      db.collection("procesos")
+        .doc(idFinalizar)
+        .update({ observacion, estado: "finalizado" })
+        .then(() => {
+          Swal.fire(
+            "Proceso actualizado",
+            `El proceso ha sido actualizado exitosamente`,
+            "success"
+          );
+        })
+        .catch((err) => {
+          Swal.fire("Error", "El procesos no se ha podido actualizar", "error");
+        });
+      document.getElementById("selectFinalizar").selectedIndex = 0;
+    }
+    setRefreshData(true);
+  };
 
   return (
     <div>
@@ -48,733 +104,202 @@ export default function Procesos() {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {procesos.map((proceso)=>{
-                      return(
-                        <tr key={proceso.id}>
-                          
-                        </tr>
-                      )
-                    })} */}
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
+                    {procesos.map((proceso) => {
+                      if (proceso.estado !== "finalizado") {
+                        return (
+                          <tr key={proceso.id}>
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="inputid"
+                                  type="text"
+                                  name="id"
+                                  placeholder=""
+                                  style={{ width: 60 }}
+                                  value={proceso.id}
+                                  disabled
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
+                            <td>
+                              <input
+                                className="input_Cantidad"
+                                type="text"
+                                name="operario"
+                                value={proceso.operacion}
+                                disabled
+                              />
+                            </td>
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="input_Cantidad"
+                                  type="text"
+                                  name="cantidad"
+                                  style={{ width: 40 }}
+                                  value={proceso.cantidad}
+                                  disabled
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
+                            <td>
+                              <input
+                                className="input_Cantidad"
+                                type="text"
+                                name="Indicación"
+                                style={{ width: 160 }}
+                                placeholder="Indicación"
+                                onChange={onChangeIndicacion}
+                                defaultValue={proceso.indicacion}
+                              />
+                            </td>
+                            <td>
+                              <input
+                                className="input_Cantidad"
+                                type="text"
+                                name="operario"
+                                disabled
+                                style={{ width: 160 }}
+                                value={proceso.nombreOperario}
+                              />
+                            </td>
 
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="input_fecha"
+                                  type="text"
+                                  name="fecha"
+                                  style={{ width: 80 }}
+                                  disabled
+                                  value={proceso.fecha}
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
 
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="input_notas notas-movil"
+                                  type=" text"
+                                  name="notas"
+                                  style={{ width: 130 }}
+                                  disabled
+                                  value={proceso.notas}
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
+                            <td>
+                              <button
+                                type="button"
+                                className="btn btn-success"
+                                style={{ width: 60 }}
+                                onClick={() => onClickOk(proceso.id)}
+                              >
+                                Ok
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      } else {
+                        return (
+                          <tr
+                            style={{ backgroundColor: "red" }}
+                            key={proceso.id}
                           >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="inputid"
+                                  type="text"
+                                  name="id"
+                                  placeholder=""
+                                  style={{ width: 60 }}
+                                  value={proceso.id}
+                                  disabled
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
+                            <td>
+                              <input
+                                className="input_Cantidad"
+                                type="text"
+                                name="operario"
+                                value={proceso.operacion}
+                                disabled
+                              />
+                            </td>
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="input_Cantidad"
+                                  type="text"
+                                  name="cantidad"
+                                  style={{ width: 40 }}
+                                  value={proceso.cantidad}
+                                  disabled
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
+                            <td>
+                              <input
+                                className="input_Cantidad"
+                                type="text"
+                                name="Indicación"
+                                style={{ width: 160 }}
+                                value={proceso.indicacion}
+                                disabled
+                              />
+                            </td>
+                            <td>
+                              <input
+                                className="input_Cantidad"
+                                type="text"
+                                name="operario"
+                                disabled
+                                style={{ width: 160 }}
+                                value={proceso.nombreOperario}
+                              />
+                            </td>
 
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="input_fecha"
+                                  type="text"
+                                  name="fecha"
+                                  style={{ width: 80 }}
+                                  disabled
+                                  value={proceso.fecha}
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
 
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
-                          >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
-                          >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
-                          >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
-                          >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
-                          >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
-                          >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                            style={{ width: 30 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            style={{ width: 40 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="Indicación"
-                          style={{ width: 180 }}
-                          placeholder="Indicación"
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="input_Cantidad"
-                          type="text"
-                          name="operario"
-                          disabled
-                          style={{ width: 180 }}
-                        />
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            style={{ width: 90 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_notas notas-movil"
-                            type=" text"
-                            name="notas"
-                            style={{ width: 130 }}
-                            disabled
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <a href="asd">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            style={{ width: 60 }}
-                          >
-                            Ok
-                          </button>
-                        </a>
-                      </td>
-                    </tr>
+                            <td>
+                              <div className="wrap-input ">
+                                <input
+                                  className="input_notas notas-movil"
+                                  type=" text"
+                                  name="notas"
+                                  style={{ width: 130 }}
+                                  disabled
+                                  value={proceso.notas}
+                                />
+                                <span className="focus-input"></span>
+                              </div>
+                            </td>
+                            <td></td>
+                          </tr>
+                        );
+                      }
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -782,22 +307,34 @@ export default function Procesos() {
 
             <span>
               <div className="row" style={{ marginTop: 30 }}>
-                <select className="form-control proceso1  ">
-                  <option>Proceso </option>
-                  <option>Proceso 2</option>
-                  <option> Proceso 3</option>
+                <select
+                  className="form-control proceso1"
+                  style={{ width: 200 }}
+                  onChange={onChangeFinalizar}
+                  id="selectFinalizar"
+                >
+                  <option>Seleccione proceso</option>
+                  {procesos.map((proceso) => {
+                    return (
+                      <option
+                        key={proceso.id}
+                        hidden={proceso.estado === "finalizado"}
+                      >
+                        {proceso.id}
+                      </option>
+                    );
+                  })}
                 </select>
                 <textarea
                   className="form-control espacio"
                   name="ObservacionesGenerales"
                   style={{ width: 225 }}
                   placeholder="Observaciones Generales"
+                  onChange={onChangeObservacion}
                 ></textarea>
-                <a href="asd" target="contenido">
-                  <button className="guardar-form-btn">
-                    Finalizar Proceso
-                  </button>
-                </a>
+                <button className="guardar-form-btn" onClick={onClickFinalizar}>
+                  Finalizar Proceso
+                </button>
               </div>
             </span>
           </div>
