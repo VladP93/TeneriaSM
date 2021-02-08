@@ -7,12 +7,16 @@ import Operario from "../pages/Operario";
 import SupervisorContorlSeleccion from "../pages/SupervisorControlSeleccion";
 import SupervisorGeneral from "../pages/SupervisorGeneral";
 import SupervisorProcesos from "../pages/SupervisorProcesos";
+import Proceso from "../pages/Proceso";
 
 export default function Routes(props) {
   const { rol, setUser } = props;
 
   return (
     <Switch>
+      <Route path={"/proceso/:id"} exact>
+        <Proceso rol={rol} setUser={setUser} />
+      </Route>
       <Route path="/administrador" exact>
         <Administrador rol={rol} setUser={setUser} />
       </Route>

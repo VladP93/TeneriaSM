@@ -26,7 +26,7 @@ export default function Logged(props) {
   return (
     <Router>
       <Routes rol={rol} setUser={setUser} />
-      {handleRol()}
+      {!window.location.href.toString().includes("proceso/") && handleRol()}
     </Router>
   );
 }

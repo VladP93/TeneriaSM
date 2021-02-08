@@ -7,6 +7,7 @@ import firebase from "../../utils/Firebase";
 import "firebase/firestore";
 
 const db = firebase.firestore(firebase);
+const QRCode = require("qrcode.react");
 
 export default function Procesos() {
   const [procesos, setProcesos] = useState([]);
@@ -119,6 +120,10 @@ export default function Procesos() {
                                   value={proceso.id}
                                   disabled
                                 />
+                                <br />
+                                <QRCode
+                                  value={`https://teneriasm.herokuapp.com/proceso/${proceso.id}`}
+                                />
                                 <span className="focus-input"></span>
                               </div>
                             </td>
@@ -223,6 +228,10 @@ export default function Procesos() {
                                   style={{ width: 60, color: "#222" }}
                                   value={proceso.id}
                                   disabled
+                                />
+                                <br />
+                                <QRCode
+                                  value={`https://teneriasm.herokuapp.com/proceso/${proceso.id}`}
                                 />
                                 <span className="focus-input"></span>
                               </div>
