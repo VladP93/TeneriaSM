@@ -8,6 +8,19 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const db = firebase.firestore(firebase);
+const QRCode = require("qrcode.react");
+
+/*
+
+var React = require('react');
+var QRCode = require('qrcode.react');
+
+React.render(
+  <QRCode value="http://facebook.github.io/react/" />,
+  mountNode
+);
+
+*/
 
 export default function Procesos() {
   const [operaciones, setOperaciones] = useState([]);
@@ -88,7 +101,10 @@ export default function Procesos() {
 
             <div className="table-responsive" id="tabla1">
               <div className="col-sm-8 col-md-12">
-                <table className="table table-striped table-bordered table-dark">
+                <table
+                  id="tabla"
+                  className="table table-striped table-bordered table-dark"
+                >
                   <thead>
                     <tr>
                       <th>id </th>
@@ -140,7 +156,6 @@ export default function Procesos() {
                             className="input_Cantidad"
                             type="text"
                             name="cantidad"
-                            id="cantidad"
                             placeholder="Cantidad"
                             onChange={onChange}
                           />
@@ -232,7 +247,6 @@ export default function Procesos() {
                                 className="input_Cantidad"
                                 type="text"
                                 name="cantidad"
-                                id="cantidad"
                                 disabled
                                 value={proc.cantidad}
                               />
@@ -278,7 +292,11 @@ export default function Procesos() {
                               <span className="focus-input"></span>
                             </div>
                           </td>
-                          <td></td>
+                          <td>
+                            <QRCode
+                              value={`https://teneriasm.herokuapp.com/proceso/${proc.id}`}
+                            />
+                          </td>
                         </tr>
                       );
                     })}

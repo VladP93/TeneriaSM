@@ -21,7 +21,7 @@ export default function CrearProceso() {
     formData.estado = "iniciado";
     db.collection("procesosControl")
       .add(formData)
-      .then(() => {
+      .then((data) => {
         Swal.fire(
           "Proceso agregado",
           `El proceso ha sido agregado exitosamente`,

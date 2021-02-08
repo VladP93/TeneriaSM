@@ -208,7 +208,9 @@ export default function Procesos() {
                       } else {
                         return (
                           <tr
-                            style={{ backgroundColor: "red" }}
+                            style={{
+                              backgroundColor: "#9B0000",
+                            }}
                             key={proceso.id}
                           >
                             <td>
@@ -218,7 +220,7 @@ export default function Procesos() {
                                   type="text"
                                   name="id"
                                   placeholder=""
-                                  style={{ width: 60 }}
+                                  style={{ width: 60, color: "#222" }}
                                   value={proceso.id}
                                   disabled
                                 />
@@ -230,6 +232,7 @@ export default function Procesos() {
                                 className="input_Cantidad"
                                 type="text"
                                 name="operario"
+                                style={{ color: "#222" }}
                                 value={proceso.operacion}
                                 disabled
                               />
@@ -240,7 +243,7 @@ export default function Procesos() {
                                   className="input_Cantidad"
                                   type="text"
                                   name="cantidad"
-                                  style={{ width: 40 }}
+                                  style={{ width: 40, color: "#222" }}
                                   value={proceso.cantidad}
                                   disabled
                                 />
@@ -252,7 +255,7 @@ export default function Procesos() {
                                 className="input_Cantidad"
                                 type="text"
                                 name="Indicación"
-                                style={{ width: 160 }}
+                                style={{ width: 160, color: "#222" }}
                                 value={proceso.indicacion}
                                 disabled
                               />
@@ -263,7 +266,7 @@ export default function Procesos() {
                                 type="text"
                                 name="operario"
                                 disabled
-                                style={{ width: 160 }}
+                                style={{ width: 160, color: "#222" }}
                                 value={proceso.nombreOperario}
                               />
                             </td>
@@ -274,7 +277,7 @@ export default function Procesos() {
                                   className="input_fecha"
                                   type="text"
                                   name="fecha"
-                                  style={{ width: 80 }}
+                                  style={{ width: 80, color: "#222" }}
                                   disabled
                                   value={proceso.fecha}
                                 />
@@ -288,7 +291,7 @@ export default function Procesos() {
                                   className="input_notas notas-movil"
                                   type=" text"
                                   name="notas"
-                                  style={{ width: 130 }}
+                                  style={{ width: 130, color: "#222" }}
                                   disabled
                                   value={proceso.notas}
                                 />

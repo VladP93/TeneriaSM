@@ -142,64 +142,6 @@ export default function ControlSeleccion() {
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="inputid"
-                            type="text"
-                            name="id"
-                            placeholder=""
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            placeholder=""
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_Cantidad"
-                            type="text"
-                            name="cantidad"
-                            placeholder=""
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_indicaciones Encargado"
-                            type="text"
-                            name="Indicacion"
-                            placeholder=""
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className="wrap-input ">
-                          <input
-                            className="input_fecha"
-                            type="text"
-                            name="fecha"
-                            placeholder=""
-                          />
-                          <span className="focus-input"></span>
-                        </div>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
                 <span className="tabla-form-titulo p-b-34 p-t-27">Código</span>

@@ -129,6 +129,15 @@ html {
   background-color: #69859ae6;
 }
 
+.modal-container {
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
+  border-collapse: collapse;
+  z-index: -1;
+  position: relative;
+}
+
 .form-tabla {
   width: 100%;
   /*Tamaño del formulario*/
